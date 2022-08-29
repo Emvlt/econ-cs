@@ -27,13 +27,3 @@ result: List = sql_utils.query_table(cursor, 'test', 'select_column', table_name
 bins = np.linspace(int(100000), int(2000000), 100000)
 array = column_to_array(result)
 hist, bin_edges = np.histogram(array, bins=bins)
-
-'''result: List = sql_utils.select_query(cursor, 'select_item', table_name, '85672188')[0]
-for r in result:   
-    if type(r) in [float,int]:
-        print(r)
-    else:
-        r = sql_utils.parse_string(r)
-        if r[0] in ['{', '[']:
-            r = json.loads(r)
-            print(r)'''
