@@ -130,3 +130,16 @@ dmypy.json
 
 images
 old
+slides/*.jpg
+slides/*.png
+slides/*.vrb
+slides/*.toc
+slides/*.tex
+slides/*.vrbsynctex.gz
+slides/*.snm
+slides/*.out
+slides/*.nav
+slides/*.fls
+slides/*.fdb_latexmk
+slides/*.aux
+slides/*.bib
