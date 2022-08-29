@@ -135,7 +135,7 @@ slides/*.png
 slides/*.vrb
 slides/*.toc
 slides/*.tex
-slides/*.vrbsynctex.gz
+slides/*.synctex.gz
 slides/*.snm
 slides/*.out
 slides/*.nav
