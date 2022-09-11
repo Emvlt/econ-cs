@@ -143,3 +143,6 @@ slides/*.fls
 slides/*.fdb_latexmk
 slides/*.aux
 slides/*.bib
+
+course_folder/*/*.html
+course_folder/*/*.png
