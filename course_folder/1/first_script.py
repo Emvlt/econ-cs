@@ -12,7 +12,7 @@ IMAGE_SAVE_LOCATION = 'bristol_logo.png'
 PAGE_LINK  = 'http://www.bristol.ac.uk/economics/'
 PAGE_SAVE_LOCATION = 'Bristol_page.html'
 
-#Functions
+## Functions
 def save_image(response:requests.Response, save_path:pathlib.Path) -> None:    
     with open(save_path, 'wb') as f:
         f.write(response.content)
@@ -27,7 +27,8 @@ image = requests.get(IMAGE_LINK)
 save_image(image, IMAGE_SAVE_LOCATION)
 
 page = requests.get(PAGE_LINK)
-save_webpage(page, PAGE_SAVE_LOCATION)
 
+print(image.content)
+save_webpage(page, PAGE_SAVE_LOCATION)
 
 
