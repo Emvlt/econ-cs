@@ -24,11 +24,11 @@ def save_webpage(response:requests.Response, save_path:pathlib.Path) -> None:
 
 # Part of the script that does something
 image = requests.get(IMAGE_LINK)
+
 save_image(image, IMAGE_SAVE_LOCATION)
 
 page = requests.get(PAGE_LINK)
-
-print(image.content)
 save_webpage(page, PAGE_SAVE_LOCATION)
+
 
 
