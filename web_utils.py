@@ -34,7 +34,7 @@ def get_link_identifier(page_link:str, page_type:str) -> str:
     else:
         raise ValueError (f'Wrong page_type {page_type} key, must be query or property')
 
-def load_soup(page_identifier:str, page_type:str) -> BeautifulSoup:
+def load_soup(page_url:str, page_type:str) -> BeautifulSoup:
     """Loads a soup. If the html is saved locally, loads it. Otherwise, downloads it from the internet. the workflow is as follows:
         - load_soup receives
 
@@ -46,17 +46,18 @@ def load_soup(page_identifier:str, page_type:str) -> BeautifulSoup:
         BeautifulSoup: the loaded soup
     """
     ## Check wether we receive a valid url
-    if validators.url(page_identifier):
+    if validators.url(page_url):
         ## If the url is valid, parse it to get its identifier
-        page_identifier = get_link_identifier(page_identifier, page_type)
+        page_identifier = get_link_identifier(page_url, page_type)
     ## Instanciate the file path and try to open it. If a FileNotFoundError is raised, download it
     page_file_path = pathlib.Path(f'{page_type}_folder/{page_identifier}.html')
     try:
         with open(page_file_path) as fp:
             return BeautifulSoup(fp, 'html.parser')
-    except FileNotFoundError(f'File path {page_file_path} not found locally, downloading...'):
+    except FileNotFoundError:
+        print(f'File path {page_file_path} not found locally, downloading...')
         try:
-            page = requests.get(page_identifier)
+            page = requests.get(page_url)
             soup = BeautifulSoup(page.content, 'html.parser')
             with open(f"{page_type}_folder/{page_identifier}.html", "w") as file:
                 file.write(str(soup))
