@@ -4,7 +4,7 @@ import requests
 import pathlib
 import re
 import json
-import validators 
+import validators
 
 def get_page_key(page_link:str) -> str:
     key = 'REGION%(.*)&'
@@ -36,22 +36,22 @@ def get_link_identifier(page_link:str, page_type:str) -> str:
 
 def load_soup(page_identifier:str, page_type:str) -> BeautifulSoup:
     """Loads a soup. If the html is saved locally, loads it. Otherwise, downloads it from the internet. the workflow is as follows:
-        - load_soup receives 
+        - load_soup receives
 
     Args:
-        page_identifier (str): Can be the id of the page locationCode_indexCode (ex: 5E219_0) OR the url 
-        page_type (str): Is it a 'property' page or a 'query' page? 
+        page_identifier (str): Can be the id of the page locationCode_indexCode (ex: 5E219_0) OR the url
+        page_type (str): Is it a 'property' page or a 'query' page?
 
     Returns:
         BeautifulSoup: the loaded soup
     """
     ## Check wether we receive a valid url
     if validators.url(page_identifier):
-        ## If the url is valid, parse it to get its identifier 
+        ## If the url is valid, parse it to get its identifier
         page_identifier = get_link_identifier(page_identifier, page_type)
     ## Instanciate the file path and try to open it. If a FileNotFoundError is raised, download it
     page_file_path = pathlib.Path(f'{page_type}_folder/{page_identifier}.html')
-    try:        
+    try:
         with open(page_file_path) as fp:
             return BeautifulSoup(fp, 'html.parser')
     except FileNotFoundError(f'File path {page_file_path} not found locally, downloading...'):
@@ -71,7 +71,7 @@ def get_property_data(property_key='85672188') -> Dict:
         property_key (str, optional): ID key of the property (from RightMove DB). Defaults to '85672188'.
 
     Returns:
-        Dict: A dictionnary with all the information about the property 
+        Dict: A dictionnary with all the information about the property
     """
     s = load_soup(property_key, 'property')
     scripts = s.find_all('script')
